@@ -1,0 +1,31 @@
+.skeleton-loader {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0.25rem;
+    background: linear-gradient(
+      to right,
+      #f6f6f6 25%,
+      #fefefe 50%,
+      #f6f6f6 75%
+    ); /* Updated background colors */
+    background-size: 200% 100%;
+    z-index: 1;
+    animation: skeleton 1s infinite linear;
+  }
+  
+  @keyframes skeleton {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
+  
+  [skeleton] {
+    background-clip: padding-box;
+  }
+  
