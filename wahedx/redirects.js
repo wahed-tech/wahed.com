@@ -15,6 +15,12 @@
 
 // We are using Geotargetly Location
 
+(function(g,e,o,t,a,r,ge,tl,y){
+    t=g.getElementsByTagName(e)[0];y=g.createElement(e);y.async=true;
+    y.src='https://g1386590346.co/gl?id=-NlMlgHDHcE4nTv78MUX&refurl='+g.referrer+'&winurl='+encodeURIComponent(window.location);
+    t.parentNode.insertBefore(y,t);
+    })(document,'script');
+
 function geotargetly_loaded() {
     var country_name = geotargetly_country_name();
     console.log("Detected country:", country_name);
