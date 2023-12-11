@@ -15,8 +15,15 @@
 
 // We are using Geotargetly Location
 
-function redirectToExternalURL(url) {
-    window.location.href = url;
-}
+function geotargetly_loaded() {
+    var country_name = geotargetly_country_name();
 
-redirectToExternalURL('https://www.wahed.com/uk/ventures');
+    // Check if the country name is "United States"
+    if (country_name === "United States") {
+        // Redirect to the US-specific URL
+        window.location.href = "https://www.wahed.com/ventures";
+    } else {
+        // Redirect to the UK-specific URL for other countries
+        window.location.href = "https://www.wahed.com/uk/ventures";
+    }
+}
