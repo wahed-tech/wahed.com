@@ -17,13 +17,14 @@
 
 function geotargetly_loaded() {
     var country_name = geotargetly_country_name();
+    console.log("Detected country:", country_name);
 
     // Check if the country name is "United States"
     if (country_name === "United States") {
-        // Redirect to the US-specific URL
+        console.log("Redirecting to US-specific page");
         window.location.href = "https://www.wahed.com/ventures";
     } else {
-        // Redirect to the UK-specific URL for other countries
+        console.log("Redirecting to UK-specific page for non-US visitors");
         window.location.href = "https://www.wahed.com/uk/ventures";
     }
 }
