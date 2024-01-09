@@ -1,4 +1,3 @@
-
 // Function to set blank values for elements with "hlal-data" attribute on page load
 function setBlankValues() {
   const elements = document.querySelectorAll("[umma-data]");
@@ -51,6 +50,3 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Error fetching Google Sheet data:", error);
     });
 });
-
-
-}
