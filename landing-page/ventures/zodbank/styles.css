@@ -1,0 +1,111 @@
+.splide {
+    padding: 20px 0;
+    cursor: pointer;
+  }
+  .splide__slide {
+    div {
+      display: block;
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 250ms;
+      transform: scale(0.8);
+      transform-origin: center center;
+    }
+  }
+  .splide__slide.is-active {
+    div {
+      transform: scale(0.8);
+    }
+  }
+  
+  .splide .splide__arrow {
+    top: 100%;
+    transform: none;
+    border-radius: unset;
+    background: transparent;
+    border-style: solid;
+    border-color: #C3C1DE;
+    border-width: 1px;
+    width: 100px;
+    height: 50px;
+    opacity: 0.9;
+    border-radius: 5rem;
+    svg {
+      filter: invert(0.8);
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  .splide__arrow--next {
+      right: 40%;
+  }
+  
+  .splide__arrow--prev {
+    left: 40%;
+  }
+  .splide__list {
+    grid-column-gap: 0.5rem !important;
+  }
+  
+  .splide__pagination {
+      display: none;
+  }
+  
+  .splide__slide div {
+      display: flex;
+      justify-content: center;
+  }
+  
+  @media (max-width: 767px) {
+      .splide__pagination {
+          display: flex;
+      }
+  
+      .splide__slide.is-active {
+          div {
+            transform: scale(0.9);
+          }
+        }
+  
+    .splide__list {
+      grid-column-gap: 0.05rem !important;
+    }
+  
+    .splide__arrow--next {
+      display: none;
+    }
+  
+    .splide__arrow--prev {
+      display: none;
+    }
+    .zod-slide-div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+  .splide__pagination__page {
+      background: #f1f1f1;
+      border: 0;
+      border-radius: 50px;
+      display: inline-block;
+      height: 4px;
+      margin: 3px;
+      opacity: .5;
+      padding: 0;
+      position: relative;
+      transition: transform .2s linear;
+      width: 16px;
+  }
+  
+  .splide__pagination__page.is-active {
+      background: #C3C1DE;
+      transform: scale(1.4);
+      z-index: 1;
+  }
+  
+  .splide__pagination {
+    bottom: -1rem;
+  }
+  
