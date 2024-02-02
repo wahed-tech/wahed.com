@@ -441,9 +441,9 @@ const returnData = {
       const initialInvestment = parseFloat(inputField.value) || 0;
       const monthlyReturnsAccumulated = calculateTotalReturn();
       const endingBalance =
-        monthlyReturnsAccumulated[monthlyReturnsAccumulated.length - 1];
+        monthlyReturnsAccumulated[monthlyReturnsAccumulated.length - 2];
       const totalReturnsPercentage =
-        ((endingBalance - initialInvestment) / initialInvestment) * 100;
+      ((endingBalance - initialInvestment) / initialInvestment) * 100;
       document.getElementById(
         "total-returns",
       ).textContent = `${totalReturnsPercentage.toFixed(2)}%`;
