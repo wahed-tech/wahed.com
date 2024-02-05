@@ -264,13 +264,18 @@ const returnData = {
   };
   
   const portfolioDescriptions = {
-    veryCons: "Description for Very Conservative",
-    conservative: "Description for Conservative",
+    veryCons:
+      "Designed for investors who are likely to need their money in the next 0-2 years, or are retired. If you are primarily looking for capital protection in the long-term with limited volatility, this portfolio might be right for you.",
+    conservative:
+      "Designed for investors who are likely to need their money in the next 2-4 years. If you are looking for a portfolio that anticipates limited capital fluctuation but a steady return, this portfolio might be right for you.",
     moderate:
-      "Designed for investors who are likely to need their money within the next 3-9 years. If you’re relatively cautious, but are looking for a return that comes with reasonable risk, this portfolio could be for you.",
-    modAgg: "Description for Moderate Aggressive",
-    aggressive: "Description for Aggressive",
-    veryAgg: "Description for Very Aggressive",
+      "Designed for investors who are likely to need their money in the next 4-6 years. If you are looking for moderate capital appreciation with a lower level of risk than other aggressive portfolios, this one might be right for you. ",
+    modAgg:
+      "Designed for investors who may need their money in 6-8 years. If you are looking for steady long-term growth with a little volatility, this portfolio might be right for you.",
+    aggressive:
+      "Designed for investors who don’t plan to withdraw for 8-10 years. This portfolio might be suitable for you if you are looking for long term capital appreciation, and are comfortable with some volatility. ",
+    veryAgg:
+      "Designed for investors who don’t plan to withdraw for 10+ years If you’re looking for strong long-term returns and are comfortable with short-term volatility, this portfolio might be right for you.",
     gold: "Description for Gold",
   };
   
