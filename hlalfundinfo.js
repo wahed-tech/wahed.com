@@ -37,13 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
       // console.log("Fetched Data:");
       // console.log(rows); // Log the fetched rows data
 
+      // Sanitize input to prevent potential XSS attacks
+      const sanitizeInput = (input) => {
+        if (typeof input !== 'string') return '';
+        // Remove any HTML tags and trim whitespace
+        return input.replace(/<[^>]*>/g, '').trim();
+      };
+
       const getValueByColumnName = (columnName) => {
         const headerRow = rows[0].split(",");
         const columnIndex = headerRow.findIndex(
           (header) => header.trim() === columnName
         );
         if (columnIndex !== -1) {
-          return rows[1].split(",")[columnIndex];
+          const rawValue = rows[1].split(",")[columnIndex];
+          return sanitizeInput(rawValue);
         }
         return "";
       };
