@@ -14,23 +14,28 @@ function sanitizeInput(input) {
   
   let sanitized = input;
   
-  // Remove script tags and their content
-  sanitized = sanitized.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-  
-  // Remove all HTML tags
-  sanitized = sanitized.replace(/<[^>]*>/g, '');
-  
-  // Decode HTML entities to prevent bypasses like &lt;script&gt;
+  // Decode HTML entities first to prevent bypasses like &lt;script&gt;
   const textarea = document.createElement('textarea');
   textarea.innerHTML = sanitized;
   sanitized = textarea.value;
   
-  // Remove the decoded HTML tags again (in case entities were used)
-  sanitized = sanitized.replace(/<[^>]*>/g, '');
+  // Remove all script tags and their content (handles variations with whitespace)
+  // Using a more comprehensive regex pattern
+  sanitized = sanitized.replace(/<script[\s\S]*?<\/script[\s]*>/gi, '');
   
-  // Remove any remaining dangerous patterns
-  sanitized = sanitized.replace(/javascript:/gi, '');
-  sanitized = sanitized.replace(/on\w+\s*=/gi, ''); // Remove event handlers
+  // Remove all HTML tags (handles self-closing tags and attributes)
+  sanitized = sanitized.replace(/<\/?[^>]+(>|$)/g, '');
+  
+  // Remove javascript: protocol
+  sanitized = sanitized.replace(/javascript\s*:/gi, '');
+  
+  // Remove data: and vbscript: protocols
+  sanitized = sanitized.replace(/data\s*:/gi, '');
+  sanitized = sanitized.replace(/vbscript\s*:/gi, '');
+  
+  // Remove event handlers - more comprehensive pattern
+  // This handles on* attributes in any context
+  sanitized = sanitized.replace(/\bon\w+\s*=\s*["']?[^"']*["']?/gi, '');
   
   // Trim whitespace
   return sanitized.trim();

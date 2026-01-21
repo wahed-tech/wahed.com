@@ -31,21 +31,24 @@ document.addEventListener("DOMContentLoaded", function () {
         
         let sanitized = input;
         
-        // Remove script tags and their content
-        sanitized = sanitized.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-        
-        // Remove all HTML tags
-        sanitized = sanitized.replace(/<[^>]*>/g, '');
-        
-        // Decode HTML entities and remove decoded tags
+        // Decode HTML entities first to prevent bypasses like &lt;script&gt;
         const textarea = document.createElement('textarea');
         textarea.innerHTML = sanitized;
         sanitized = textarea.value;
-        sanitized = sanitized.replace(/<[^>]*>/g, '');
         
-        // Remove dangerous patterns
-        sanitized = sanitized.replace(/javascript:/gi, '');
-        sanitized = sanitized.replace(/on\w+\s*=/gi, '');
+        // Remove all script tags and content (handles variations with whitespace)
+        sanitized = sanitized.replace(/<script[\s\S]*?<\/script[\s]*>/gi, '');
+        
+        // Remove all HTML tags
+        sanitized = sanitized.replace(/<\/?[^>]+(>|$)/g, '');
+        
+        // Remove dangerous protocols
+        sanitized = sanitized.replace(/javascript\s*:/gi, '');
+        sanitized = sanitized.replace(/data\s*:/gi, '');
+        sanitized = sanitized.replace(/vbscript\s*:/gi, '');
+        
+        // Remove event handlers
+        sanitized = sanitized.replace(/\bon\w+\s*=\s*["']?[^"']*["']?/gi, '');
         
         return sanitized.trim();
       };
