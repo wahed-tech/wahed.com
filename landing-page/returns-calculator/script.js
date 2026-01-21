@@ -566,8 +566,8 @@ const returnData = {
                     maximumFractionDigits: 2,
                   }).format(amount);
   
-                  tooltipAmount.innerHTML = `£${formattedAmount}`;
-                  tooltipDate.innerHTML = tooltipData.label;
+                  tooltipAmount.textContent = `£${formattedAmount}`;
+                  tooltipDate.textContent = tooltipData.label;
   
                   // Check if on a mobile device (by window width)
                   var isMobile = window.innerWidth <= 768; // Adjust 768 as needed for your mobile breakpoint

@@ -33,8 +33,37 @@ document.addEventListener("DOMContentLoaded", function () {
         return row + ",";
       });
 
-      console.log("Fetched Data:");
-      console.log(rows); // Log the fetched rows data
+      // Removed console.log to prevent data exposure in production
+      // console.log("Fetched Data:");
+      // console.log(rows); // Log the fetched rows data
+
+      // Enhanced sanitization to prevent XSS attacks
+      const sanitizeInput = (input) => {
+        if (typeof input !== 'string') return '';
+        
+        let sanitized = input;
+        
+        // Decode HTML entities first to prevent bypasses like &lt;script&gt;
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = sanitized;
+        sanitized = textarea.value;
+        
+        // Remove all script tags and content (handles variations with whitespace)
+        sanitized = sanitized.replace(/<script[\s\S]*?<\/script[\s]*>/gi, '');
+        
+        // Remove all HTML tags
+        sanitized = sanitized.replace(/<\/?[^>]+(>|$)/g, '');
+        
+        // Remove dangerous protocols
+        sanitized = sanitized.replace(/javascript\s*:/gi, '');
+        sanitized = sanitized.replace(/data\s*:/gi, '');
+        sanitized = sanitized.replace(/vbscript\s*:/gi, '');
+        
+        // Remove event handlers
+        sanitized = sanitized.replace(/\bon\w+\s*=\s*["']?[^"']*["']?/gi, '');
+        
+        return sanitized.trim();
+      };
 
       const getValueByColumnName = (columnName) => {
         const headerRow = rows[0].split(",");
@@ -42,7 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
           (header) => header.trim() === columnName
         );
         if (columnIndex !== -1) {
-          return rows[1].split(",")[columnIndex]; // Keep the index as 1 to target the first row of data in Sheet 2
+          const rawValue = rows[1].split(",")[columnIndex];
+          return sanitizeInput(rawValue);
         }
         return "";
       };
@@ -55,8 +85,9 @@ document.addEventListener("DOMContentLoaded", function () {
         element.innerText = value;
       });
 
-      console.log("Processed Data:");
-      console.log(elements); // Log the processed elements data
+      // Removed console.log to prevent data exposure in production
+      // console.log("Processed Data:");
+      // console.log(elements); // Log the processed elements data
     })
     .catch((error) => {
       console.error("Error fetching Google Sheet data:", error);

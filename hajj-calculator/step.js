@@ -56,7 +56,8 @@ backwardButton.addEventListener("click", () => {
 	const currentStep = getCurrentStep();
 	if (currentStep) {
 		const previousStep = getPreviousStep(currentStep);
-		console.log(`Navigating backward from ${currentStep} to ${previousStep}`);
+		// Removed console.log to prevent data exposure in production
+		// console.log(`Navigating backward from ${currentStep} to ${previousStep}`);
 		showStep(previousStep);
 		hideStep(currentStep);
 		backwardButton.setAttribute("st-target", previousStep);

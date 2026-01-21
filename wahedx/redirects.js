@@ -23,14 +23,17 @@
 
 function geotargetly_loaded() {
     var country_name = geotargetly_country_name();
-    console.log("Detected country:", country_name);
+    // Removed console.log to prevent data exposure in production
+    // console.log("Detected country:", country_name);
 
     // Check if the country name is "United States"
     if (country_name === "United States") {
-        console.log("Redirecting to US-specific page");
+        // Removed console.log to prevent data exposure in production
+        // console.log("Redirecting to US-specific page");
         window.location.href = "https://www.wahed.com/ventures";
     } else {
-        console.log("Redirecting to UK-specific page for non-US visitors");
+        // Removed console.log to prevent data exposure in production
+        // console.log("Redirecting to UK-specific page for non-US visitors");
         window.location.href = "https://www.wahed.com/uk/ventures";
     }
 }

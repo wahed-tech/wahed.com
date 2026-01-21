@@ -9,7 +9,7 @@ function createPopup(logoSrc, headingText, subheadingText, qrCodeSrc) {
     wrapper.style.position = "relative";
   
     const closeButton = document.createElement("button");
-    closeButton.innerHTML = "&times;";
+    closeButton.textContent = "×";
     closeButton.style.position = "absolute";
     closeButton.style.top = "10px";
     closeButton.style.right = "10px";
