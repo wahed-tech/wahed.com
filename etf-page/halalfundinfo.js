@@ -25,11 +25,29 @@ document.addEventListener("DOMContentLoaded", function () {
       // console.log("Fetched Data:");
       // console.log(rows); // Log the fetched rows data
 
-      // Sanitize input to prevent potential XSS attacks
+      // Enhanced sanitization to prevent XSS attacks
       const sanitizeInput = (input) => {
         if (typeof input !== 'string') return '';
-        // Remove any HTML tags and trim whitespace
-        return input.replace(/<[^>]*>/g, '').trim();
+        
+        let sanitized = input;
+        
+        // Remove script tags and their content
+        sanitized = sanitized.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+        
+        // Remove all HTML tags
+        sanitized = sanitized.replace(/<[^>]*>/g, '');
+        
+        // Decode HTML entities and remove decoded tags
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = sanitized;
+        sanitized = textarea.value;
+        sanitized = sanitized.replace(/<[^>]*>/g, '');
+        
+        // Remove dangerous patterns
+        sanitized = sanitized.replace(/javascript:/gi, '');
+        sanitized = sanitized.replace(/on\w+\s*=/gi, '');
+        
+        return sanitized.trim();
       };
 
       const getValueByColumnName = (columnName) => {
