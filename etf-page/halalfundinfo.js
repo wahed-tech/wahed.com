@@ -21,8 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
         return row + ",";
       });
 
-      console.log("Fetched Data:");
-      console.log(rows); // Log the fetched rows data
+      // Removed console.log to prevent data exposure in production
+      // console.log("Fetched Data:");
+      // console.log(rows); // Log the fetched rows data
 
       const getValueByColumnName = (columnName) => {
         const headerRow = rows[0].split(",");
@@ -43,8 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
         element.innerText = value;
       });
 
-      console.log("Processed Data:");
-      console.log(elements); // Log the processed elements data
+      // Removed console.log to prevent data exposure in production
+      // console.log("Processed Data:");
+      // console.log(elements); // Log the processed elements data
     })
     .catch((error) => {
       console.error("Error fetching Google Sheet data:", error);
